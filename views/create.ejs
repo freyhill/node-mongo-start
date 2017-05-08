@@ -1,0 +1,28 @@
+<%- include('component/header') %>
+
+<div class="">
+<form id='appsub' method='post' action='save' enctype='multipart/form-data'>
+
+  <select name="whichapp">
+    <option value="none">请选择</option>
+    <option value="student">学员端</option>
+    <option value="bd">BD端</option>
+    <option value="coach">教练端</option>
+    <option value="assistant">总监端</option>
+    <option value="driver">司机端</option>
+    <option value="bi">BI端</option>
+  </select>
+  <div class="version">
+    <input name="version" type="text" placeholder="版本号">
+  </div>
+  <div>
+    <input name="device" type="radio" value="iOS" /> iOS
+    <input name="device" type="radio" value="Android" /> Android
+  </div>
+  <div><input name="files" type="file"></div>
+  <div>
+    <textarea name="remark"></textarea>
+  </div>
+  <input type='submit' value='提交'/>
+  </form>
+</div>
