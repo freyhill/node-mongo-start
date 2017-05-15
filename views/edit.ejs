@@ -1,0 +1,74 @@
+<%- include('component/header') %>
+
+<div class="createmain">
+<form id='appsub' method='post' action='/appstore/edit/<%= data[0]._id %>' enctype='multipart/form-data'>
+  
+
+  <table>
+    <tr>
+      <td class="text-right">app种类</td>
+      <td>
+        <select name="whichapp">
+        <option value="none">请选择</option>
+        <option value="student" selected="<% data[0].whichapp =='student' ? 'true':'false' %>">学员端</option>
+        <option value="bd" selected="<% data[0].whichapp =='bd' ? 'true':'false' %>">>BD端</option>
+        <option value="coach" selected="<% data[0].whichapp =='coach' ? 'true':'false' %>">教练端</option>
+        <option value="assistant" selected="<% data[0].whichapp =='assistant' ? 'true':'false' %>">总监端</option>
+        <option value="driver" selected="<% data[0].whichapp =='driver' ? 'true':'false' %>">司机端</option>
+        <option value="bi" selected="<% data[0].whichapp =='bi' ? 'true':'false' %>">BI端</option>
+      </select>
+      </td>
+    </tr>
+    <tr>
+       <td class="text-right">版本</td>
+      <td>
+        <div class="version">
+          <input name="version" value="<%= data[0].version %>" type="text" placeholder="版本号">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">端</td>
+      <td>
+        <div>
+          <%if(data[0].device == "iOS"){%>
+            <input name="device" type="radio" value="iOS" checked  /> iOS
+            <input name="device" type="radio" value="Android" /> Android
+          <%}else if(data[0].device == "Android"){%>
+            <input name="device" type="radio" value="iOS"  /> iOS
+            <input name="device" type="radio" value="Android" checked /> Android
+          <%}%>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">文件</td>
+      <td>
+        <div><input name="files" type="file" value="<%= data[0].files %>">
+    
+          <input name="files_no_change" value="<%= data[0].files %>" readonly="true" style="border:none">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">备注</td>
+      <td>
+         <div>
+            <textarea id="remark" name="remark" value=""><%= data[0].remark %></textarea>
+          </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        
+      </td>
+      <td>
+          <input type='submit' value='修改'/>
+
+      </td>
+    </tr>
+  </table>
+
+  </form>
+ 
+  </div>

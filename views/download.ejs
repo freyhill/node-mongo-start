@@ -1,0 +1,101 @@
+<%- include('component/headerdownload') %>
+	<div class="downloadmain">
+		<h1></h1>
+		<div class="pic">
+		</div>
+		<div class="download"></div> 
+	</div>
+ 	<script>
+        var UA = navigator.userAgent,
+            iOS = /ipad|iphone|ipod/gi.test(UA),
+            Android = /android/gi.test(UA),
+            isWechat = /MicroMessenger/gi.test(UA),
+            device = iOS ? "iOS" : "Android";
+
+        var whichapp = location.pathname.split("/")[location.pathname.split("/").length - 1];
+
+
+         var whichappdom="",appicon="";
+
+        switch(whichapp){
+            case 'driver':
+                whichappdom = "司机端" ;
+                appicon = "/upload/driver/512.png"
+                break;
+            case 'coach':
+                whichappdom = "教练端" ;
+                appicon = "/upload/coach/512x512.png"
+                break;
+            case 'student':
+                whichappdom = "学员端" ;
+                appicon = "/upload/student/512.png"
+                break;
+            case 'assistant':
+                whichappdom = "总监端" ;
+                appicon = "/upload/assistant/512.png"
+                break;
+            case 'bd':
+                whichappdom = "BD端" ;
+                appicon = "/upload/bd/512x512.png"
+                break;
+            case 'bi':
+                whichappdom = "BI端" ;
+                appicon = "/upload/bi/512.png" 
+                break;                    
+        }
+
+        $(".downloadmain h1").html("趣学车"+whichappdom);
+        $(".pic").html("<img src='"+appicon+"'>");
+        
+        function getAppVersion(callback){
+            $.ajax({
+                url:"/appstore/download/"+whichapp+"/"+device,
+                type:"get",
+                success:function(data){
+                        var obj = JSON.parse(data);
+                        if(obj.length !==0){
+                             if(iOS){
+                                $(".download").append("<div class='downbtn iosbtn'  >下载iOS"+whichappdom+obj[0].version+"</div>");
+                                }else{
+                                    $(".download").append("<div class='downbtn androidbtn'  >下载Android"+whichappdom+obj[0].version+"</div>");
+                            }
+                            if(callback){
+                                callback(obj[0].files);
+                            }
+                        }else{
+                            $(".download").append("<div class='downbtn androidbtn'  >暂无"+whichappdom+"</div>");
+                        }
+                       
+                        
+                        
+                        
+                }
+            })
+        }
+
+        getAppVersion(function(files){
+
+                $(".downbtn").click(function(){
+                   if(isWechat){
+                        alert("通过浏览器打开");
+                        return;
+                    }
+
+                    if(iOS){
+                        window.location.href="itms-services://?action=download-manifest&url=https://www.goxueche.com/app/student/manifest.plist"
+                    }else if(Android){
+                         window.location.href="/upload/"+files;
+                    }
+                    
+                })
+             
+        });
+
+
+
+
+	</script>
+
+
+
+

@@ -1,36 +1,99 @@
 <%- include('component/header') %>
+<div class="main">
+   <button type="button" style="margin-top: 20px" class="newversion btn btn-primary pull-right">创建新版本</button>
 
+   <button type="button" style="margin-top: 20px;margin-right:30px" class="download btn btn-primary pull-right" >下载页面</button>
 
 <table class="table">
-  <caption>基本的表格布局</caption>
+  <caption>所有app版本</caption>
    <thead>
       <tr>
          <th>App</th>
          <th>版本</th>
          <th>设备</th>
          <th>备注</th>
-         <th>下载</th>
+         <th>编辑</th>
+         <th>删除</th>
+         <th>上传时间</th>
       </tr>
    </thead>
    <tbody>
+    <% data.forEach(function (item) { %>
+    <% 
+      var whichapp="";
     
-   </tbody>
-</table>
-
-
-<script>
-  
-
-</script>
-
-<!--
-<% data.forEach(function (item) { %>
+      switch(item.whichapp){
+         case 'student':
+            whichapp = "学员端"
+            break;
+         case 'coach' :
+            whichapp = "教练端"
+            break;  
+         case 'assistant' :   
+            whichapp = "总监端"
+            break; 
+         case 'bd' :
+            whichapp = "BD端"
+            break; 
+         case 'driver':   
+            whichapp = "司机端"
+            break;  
+         case 'bi':
+            whichapp = "BI端"
+            break;    
+      }
+   
+     %>
       <tr>
-         <td><%= item.whichapp %></td>
+         <td><a href="/appstore/download/<%= item.whichapp %>/<%= item.device%>/<%=item.version  %>"><%= whichapp %></a></td>
          <td><%= item.version %></td>
          <td><%= item.device %></td>
          <td><%= item.remark %></td>
-         <td><a href="http://localhost:5002/upload/<%=item.files  %>">下载</a></td>
+         <th><a href="/appstore/edit/<%=item._id  %>" >编辑</a></th>
+         <td><a class="deleteone" data-toggle="modal" data-target="#myModal" data-id=<%= item._id %> >删除</a></td>
+         <td><%= item.time %></td>
       </tr>
     <% }) %>
--->
+   </tbody>
+</table>
+ 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+               &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               删除版本
+            </h4>
+         </div>
+         <div class="modal-body">
+            确定删除这个版本吗？
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消
+            </button>
+            <button type="button" class="btn btn-primary">
+               <a id="modaldelte" data-id="ddd" style="color:#fff"   >确定</a>
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal -->
+</div>
+</div>
+<script>
+$(".deleteone").click(function(){
+   var id=$(this).data('id');
+   $("#modaldelte").attr("href","/appstore/delete?id="+id)
+})
+ $(".newversion").click(function(){
+    window.location.href="/appstore/create"
+  })
+ $(".download").click(function(){
+    window.location.href="/appstore/download"
+ })
+</script>
+
+
+

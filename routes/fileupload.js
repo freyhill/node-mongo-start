@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         var fileFormat =(file.originalname).split(".");
         
-        cb(null, file.fieldname + '-' + fileFormat[0] + "." + fileFormat[fileFormat.length - 1]);
+        cb(null, fileFormat[0] + "." + fileFormat[fileFormat.length - 1]);
     }
 });
 

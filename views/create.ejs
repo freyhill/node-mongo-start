@@ -1,28 +1,68 @@
 <%- include('component/header') %>
 
-<div class="">
+<div class="createmain">
 <form id='appsub' method='post' action='save' enctype='multipart/form-data'>
+<table>
+    <tr>
+      <td class="text-right">app种类</td>
+      <td>
+        <select name="whichapp">
+          <option value="none">请选择</option>
+          <option value="student">学员端</option>
+          <option value="bd">BD端</option>
+          <option value="coach">教练端</option>
+          <option value="assistant">总监端</option>
+          <option value="driver">司机端</option>
+          <option value="bi">BI端</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">版本</td>
+      <td>
+        <div class="version">
+          <input name="version" type="text" placeholder="版本号">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">端</td>
+      <td>
+        <div>
+          <input name="device" type="radio" value="iOS" /> iOS
+          <input name="device" type="radio" value="Android" /> Android
+        </div>
+      </td>
+    </tr>
 
-  <select name="whichapp">
-    <option value="none">请选择</option>
-    <option value="student">学员端</option>
-    <option value="bd">BD端</option>
-    <option value="coach">教练端</option>
-    <option value="assistant">总监端</option>
-    <option value="driver">司机端</option>
-    <option value="bi">BI端</option>
-  </select>
-  <div class="version">
-    <input name="version" type="text" placeholder="版本号">
-  </div>
-  <div>
-    <input name="device" type="radio" value="iOS" /> iOS
-    <input name="device" type="radio" value="Android" /> Android
-  </div>
-  <div><input name="files" type="file"></div>
-  <div>
-    <textarea name="remark"></textarea>
-  </div>
-  <input type='submit' value='提交'/>
+    <tr>
+      <td class="text-right">文件</td>
+      <td>
+        <div>
+          <input name="files" type="file">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-right">备注</td>
+      <td>
+        <div>
+          <textarea name="remark"></textarea>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>  
+        <input type='submit' value='提交'/>
+      </td>
+    </tr>
+  </table>
+
+  
+  
+  
+  
+  
   </form>
 </div>

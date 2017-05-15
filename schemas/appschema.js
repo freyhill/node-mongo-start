@@ -8,7 +8,7 @@ var AppSchema = new mongoose.Schema({
 	whichapp:  {type : String },
 	device  :  {type : String },
 	remark  :  {type : String },
-	time	:  {type : Date , default: Date.now  }
+	time	:  {type : String   }
 })
 
 
